@@ -13,6 +13,7 @@ jobs:
           command: echo "<< parameters.text >>"
 
 workflows:
+  version: 2
   main:
     jobs:
       - echo:
