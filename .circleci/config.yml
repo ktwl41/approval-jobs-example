@@ -2,16 +2,26 @@ version: 2.1
 
 jobs:
   echo:
+    parameters:
+      text:
+        type: string
     docker:
       - image: cimg/base:stable
     steps:
       - run:
           name: Greet
-          command: echo "I love ${COLOR} builds."
-          environment:
-            COLOR: "green"
+          command: echo "<< parameters.text >>"
 
 workflows:
   main:
     jobs:
-      - echo
+      - echo:
+          name: before_on_hold
+          text: "Before On-Hold job"
+      - hold:
+          type: approval
+          requires:
+            - before_on_hold
+      - echo:
+          name: after_on_hold
+          text: "After On-Hold job"
