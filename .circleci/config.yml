@@ -25,3 +25,5 @@ workflows:
       - echo:
           name: after_on_hold
           text: "After On-Hold job"
+          requires:
+            - hold
