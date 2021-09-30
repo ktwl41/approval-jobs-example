@@ -13,8 +13,6 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: echo "After On-Hold"
-  hold:
-    type: approval
 
 workflows:
   version: 2
@@ -22,6 +20,7 @@ workflows:
     jobs:
       - before_on_hold
       - hold:
+          type: approval
           requires:
             - before_on_hold
       - after_on_hold:
